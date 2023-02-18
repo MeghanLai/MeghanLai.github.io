@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabbit Clicker</title>
+    <link rel="stylesheet" href="rabbitstyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<main class="gameplay">
+    <h2>clickereria - click to attract rabbits </h2>
+    <img src="./rabbit.png" alt="this is a lettuce bowl" width=200 onclick="addMoney(amountPerClick)">
+    <h4>current money: <span id = "moneyValue">0</span></h4>
+    <h2 id = "progressText"></h2>
+    <div class="upgradeArea">
+        <div class="rabbitPrice">
+            <p>your rabbits give you $ <span id = "currentRabbitPrice">2</span>!</p>
+            <button onclick="upgradeTheClicker()">click to upgrade clicker $ <span id = "priceSpan">10</span></button>
+        </div>
+
+    </div>
+
+
+
+</main>
+<script>
+    const currentMoney = document.getElementById("moneyValue");
+    const currentRabbitPrice = document.getElementById("currentRabbitPrice")
+    const priceSpan = document.getElementById("priceSpan");
+    var money=0;
+    var total=0;
+    var amountPerClick = 2;
+    var costToUpgrade;
+
+    function addMoney(amountToAdd){
+        money = money + amountToAdd;
+        total += amountToAdd
+        currentMoney.innerHTML = money;
+    }
+
+    function deductMoney(amountToDeduct){
+        money-= amountToDeduct;
+        currentMoney.innerHTML = money;
+
+    }
+    function upgradeTheClicker(){
+        costToUpgrade = 5* parseInt (currentRabbitPrice.innerHTML)
+
+    
+
+    if(money >= costToUpgrade){
+        money -= costToUpgrade;
+        currentMoney.innerHTML = money;
+        amountPerClick+= 2;
+        currentRabbitPrice.innerHTML = amountPerClick;
+    }
+
+    costToUpgrade = 5 * parseInt(currentRabbitPrice.innerHTML);
+    priceSpan.innerHTML = costToUpgrade;
+
+    
+    }
+
+    function showProgress(){
+        const messageList = ["You are befriending and training rabbits in your backyard.",
+                "Your rabbit buddies are spreading word of your services, and bringing you lost money!",
+                "Your rabbit empire is growing, you need two houses to store the food to feed them all!",
+                "Your rabbits have helped  you concur your neighborhood, you own ALL the houses!",
+                "YOU HAVE TAKEN OVER THE WORLD WITH YOUR RABBIT FRIENDS!"]
+
+            const progtext = document.getElementById("progressText");
+            if(total < 1000){
+                progtext.innerHTML = messageList[0];
+            }
+            else if(total >= 1000 && total < 2000){
+                progtext.innerHTML = messageList[1];
+            }
+
+            else if(total >= 1000 && total < 2000){
+                progtext.innerHTML = messageList[2];
+            }
+            
+            else if(total >= 2000 && total < 3000){
+                progtext.innerHTML = messageList[3];
+            }
+            
+            else{
+                progtext.innerHTML = messageList[4];
+            }
+            }
+
+             showProgress();
+        setInterval(showProgress, 1000)
+
+        
+
+</script>
+
+    
+</body>
+</html>
